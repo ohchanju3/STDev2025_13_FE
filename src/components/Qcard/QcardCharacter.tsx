@@ -13,8 +13,8 @@ const QcardCharacterWrapper = styled.div`
 `;
 
 const QCardCharaterImg = styled.div`
-  width: 103.954px;
-  height: 173.215px;
+  width: 100px;
+  height: 170px;
   background-image: url("/images/Main/mainLogo1.png");
   background-size: cover;
   background-position: center;

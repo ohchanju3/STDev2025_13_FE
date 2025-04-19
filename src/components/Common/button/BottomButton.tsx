@@ -1,17 +1,31 @@
 // BottomButton.tsx
 import styled from "styled-components";
 import Button from "./Button";
-import { useEmotionStore } from "src/state/emotionStore";
 
-const BottomButton = () => {
-  const { selectedEmotion } = useEmotionStore();
+interface buttonProps {
+  onclickLeft?: () => void;
+  onclickRight?: () => void;
+  isLeftActive?: boolean;
+  isRightActive?: boolean;
+}
 
+const BottomButton = ({
+  onclickLeft,
+  onclickRight,
+  isLeftActive = true,
+  isRightActive = false,
+}: buttonProps) => {
   return (
     <BottomButtonContainer>
-      <Button imgSrc="/images/common/arrowLeft.png" />
+      <Button
+        imgSrc="/images/common/arrowLeft.png"
+        onClick={onclickLeft}
+        $isWhiteBg={isLeftActive}
+      />
       <Button
         imgSrc="/images/common/arrowRight.png"
-        $isWhiteBg={selectedEmotion !== ""}
+        onClick={isRightActive ? onclickRight : undefined}
+        $isWhiteBg={isRightActive}
       />
     </BottomButtonContainer>
   );
