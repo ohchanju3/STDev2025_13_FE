@@ -4,12 +4,14 @@ import ProgressBar from "@components/Qcard/ProgressBar";
 import QcardResultBox from "@components/Qcard/QcardResultBox";
 import styled from "styled-components";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const QcardResult = () => {
   const [flipped, setFlipped] = useState(false);
   const navigate = useNavigate();
   const [showPopup, setShowPopup] = useState(false);
+  const location = useLocation();
+  const { base64Image, backTitle, backContent } = location.state || {};
 
   const handleArchivingClick = () => {
     setShowPopup(true);
@@ -24,7 +26,13 @@ const QcardResult = () => {
       <Header title="Oh! 카드 생성" customBackPath="/main" />
       <ProgressBar totalSteps={4} currentStep={4} />
       <QCardResultContainer>
-        <QcardResultBox flipped={flipped} setFlipped={setFlipped} />
+        <QcardResultBox
+          flipped={flipped}
+          setFlipped={setFlipped}
+          base64Image={base64Image}
+          backTitle={backTitle}
+          backContent={backContent}
+        />
         {!flipped ? (
           <QcardResultClickBtn src="/images/common/clickBtn.png" />
         ) : (

@@ -91,9 +91,9 @@ export const patchNoResponse = async <TRequest>(
 };
 
 // PATCH 요청 (응답 데이터 있음)
-export const patchResponse = async <TRequest, TResponse>(
+export const patchResponse = async <TRequest = null, TResponse = any>(
   url: string,
-  requestBody: TRequest
+  requestBody: TRequest | null = null // 기본값을 null로 설정
 ): Promise<TResponse | null> => {
   try {
     const response = await instance.patch<TResponse>(url, requestBody);

@@ -7,7 +7,7 @@ import styled from "styled-components";
 import { useNavigate, useLocation } from "react-router-dom";
 import { floatingSmall } from "@components/Login/animation";
 import Loading from "@components/Common/loading/Loading";
-import { postQcardText } from "@apis/patchQcardText";
+import { getQcardResultData } from "@apis/patchQcardText";
 
 const QcardText = () => {
   const [text, setText] = useState("");
@@ -15,7 +15,7 @@ const QcardText = () => {
   const navigate = useNavigate();
 
   const location = useLocation();
-  const { firstResult } = location.state || {};
+  const { firstResult, processesId } = location.state || {};
 
   useEffect(() => {
     if (firstResult) {
@@ -25,13 +25,22 @@ const QcardText = () => {
   }, [firstResult]);
 
   const submitCard = async () => {
-    const success = await postQcardText(text);
-    if (success) {
-      alert("카드가 생성되었습니다!");
-      navigate("/qcardResult");
+    setIsLoading(true);
+
+    const result = await getQcardResultData(processesId);
+    console.log("결과", result);
+
+    if (result) {
+      navigate("/qcardResult", {
+        state: {
+          base64Image: result?.data?.base64Image ?? null,
+          backTitle: result?.data?.backTitle,
+          backContent: result?.data?.backContent,
+        },
+      });
     } else {
+      setIsLoading(false);
       alert("카드 생성에 실패했습니다 :(");
-      navigate("/qcardResult");
     }
   };
 

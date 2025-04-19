@@ -5,9 +5,15 @@ import { useRef } from "react";
 const QcardResultBox = ({
   flipped,
   setFlipped,
+  base64Image,
+  backTitle,
+  backContent,
 }: {
   flipped: boolean;
   setFlipped: (val: boolean) => void;
+  base64Image: string;
+  backTitle: string;
+  backContent: string;
 }) => {
   const today = new Date().toISOString().split("T")[0].replace(/-/g, ".");
   const cardRef = useRef<HTMLDivElement>(null);
@@ -29,7 +35,7 @@ const QcardResultBox = ({
     <QcardFlipContainer onClick={() => setFlipped(!flipped)}>
       <QcardInner flipped={flipped}>
         <QcardFront ref={cardRef}>
-          <QcardResultContent />
+          <QcardResultContent image={base64Image} />
           <QcardResultDate>{today}</QcardResultDate>
           <QcardResultDown
             src="/images/common/download.svg"
@@ -41,12 +47,8 @@ const QcardResultBox = ({
         </QcardFront>
         <QcardBack>
           <QcardBackContainer>
-            <QcardBackTitle>title</QcardBackTitle>
-            <QcardBackContent>
-              오늘 이유 없이 무기력했지만, 그 감정을 있는 그대로 받아들이기로
-              했다.번아웃 속에서도 잘 살아가려는 나, 참 대견해.뇌는 에너지를
-              아끼기 위해 무기력을 유도하기도 한대. 나를 지키는 반응이었구나!
-            </QcardBackContent>
+            <QcardBackTitle>{backTitle}</QcardBackTitle>
+            <QcardBackContent>{backContent}</QcardBackContent>
           </QcardBackContainer>
         </QcardBack>
       </QcardInner>
@@ -104,9 +106,9 @@ const QcardBack = styled(QcardFace)`
   margin-top: 2rem;
 `;
 
-const QcardResultContent = styled.div`
+const QcardResultContent = styled.div<{ image: string }>`
   border-radius: 20px;
-  background-image: url("/images/test.png");
+  background-image: ${({ image }) => `url(${image})`};
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;

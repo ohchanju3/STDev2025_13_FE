@@ -46,7 +46,7 @@ const QcardQnA = () => {
       const firstResult = res.data.firstResult;
 
       setTimeout(() => {
-        navigate("/qcardText", { state: { firstResult } });
+        navigate("/qcardText", { state: { firstResult, processesId } });
       }, 1000);
     } catch (err) {
       console.error("전송 실패:", err);
