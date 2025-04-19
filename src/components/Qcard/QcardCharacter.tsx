@@ -1,3 +1,4 @@
+import { useEmotionStore } from "src/state/emotionStore";
 import styled from "styled-components";
 
 const QcardCharacterWrapper = styled.div`
@@ -45,17 +46,17 @@ const QCardTextbox = styled.div`
 const QCardText = styled.p`
   text-align: center;
   color: #000;
-  font-size: 13.857px;
-  font-style: normal;
-  font-weight: 400;
+  font-size: 20px;
+  font-weight: bolder;
   text-align: center;
 `;
 
-interface QcardCharacterProps {
-  emotionSrc?: string;
-}
+const QcardCharacter = () => {
+  const { selectedEmotion } = useEmotionStore();
+  const emotionSrc = selectedEmotion
+    ? `/images/emotion/${selectedEmotion}.png`
+    : "";
 
-const QcardCharacter = ({ emotionSrc }: QcardCharacterProps) => {
   return (
     <QcardCharacterWrapper>
       <QCardCharaterImg>
@@ -63,9 +64,15 @@ const QcardCharacter = ({ emotionSrc }: QcardCharacterProps) => {
       </QCardCharaterImg>
       <QCardTextbox>
         <QCardText>
-          지금 00님의
-          <br />
-          감정은 어떤가요?
+          {selectedEmotion ? (
+            `#${selectedEmotion}`
+          ) : (
+            <>
+              지금 00님의
+              <br />
+              감정은 어떤가요?
+            </>
+          )}
         </QCardText>
       </QCardTextbox>
     </QcardCharacterWrapper>

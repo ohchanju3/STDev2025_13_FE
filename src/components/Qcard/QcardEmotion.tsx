@@ -1,10 +1,6 @@
 import styled from "styled-components";
 import EmotionBox from "./QcardEmotionBox";
-
-interface EmotionContainerProps {
-  selectedEmotion: string;
-  setSelectedEmotion: (emotion: string) => void;
-}
+import { useEmotionStore } from "src/state/emotionStore";
 
 const EmotionWrapper = styled.div`
   display: grid;
@@ -22,20 +18,19 @@ const EmotionWrapper = styled.div`
   }
 `;
 
-const EmotionContainer = ({
-  selectedEmotion,
-  setSelectedEmotion,
-}: EmotionContainerProps) => {
+const EmotionContainer = () => {
+  const { selectedEmotion, setSelectedEmotion } = useEmotionStore();
+
   const emotions = [
-    { src: "/images/emotion/happy.png", des: "행복" },
-    { src: "/images/emotion/excited.png", des: "기대" },
-    { src: "/images/emotion/proud.png", des: "뿌듯" },
-    { src: "/images/emotion/calm.png", des: "평온" },
-    { src: "/images/emotion/lethargic.png", des: "무기력" },
-    { src: "/images/emotion/disappointed.png", des: "실망" },
-    { src: "/images/emotion/anxious.png", des: "불안" },
-    { src: "/images/emotion/sad.png", des: "슬픔" },
-    { src: "/images/emotion/angry.png", des: "분노" },
+    { src: "/images/emotion/행복.png", des: "행복" },
+    { src: "/images/emotion/기대.png", des: "기대" },
+    { src: "/images/emotion/뿌듯.png", des: "뿌듯" },
+    { src: "/images/emotion/평온.png", des: "평온" },
+    { src: "/images/emotion/무기력.png", des: "무기력" },
+    { src: "/images/emotion/실망.png", des: "실망" },
+    { src: "/images/emotion/불안.png", des: "불안" },
+    { src: "/images/emotion/슬픔.png", des: "슬픔" },
+    { src: "/images/emotion/분노.png", des: "분노" },
   ];
 
   return (
