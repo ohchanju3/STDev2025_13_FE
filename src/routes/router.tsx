@@ -9,6 +9,8 @@ import QcardText from "@pages/Qcard/QcardText";
 import QcardResult from "@pages/Qcard/QcardResult";
 import OAuthRedirectHandler from "@pages/Login/OAuthRedirectHandler";
 import QcardReportPage from "@pages/QcardReport/QcardReportPage";
+import QcardReportDetail from "@pages/QcardReport/QcardReportDetail";
+import QcardReportCard from "@pages/QcardReport/QcardReportCard";
 
 //layouts
 
@@ -30,6 +32,8 @@ const router = createBrowserRouter([
       { path: "qcardText", element: <QcardText /> },
       { path: "qcardResult", element: <QcardResult /> },
       { path: "qreport", element: <QcardReportPage /> },
+      { path: "qreportDetail", element: <QcardReportDetail /> },
+      { path: "qreportCard", element: <QcardReportCard /> },
     ],
   },
 ]);
