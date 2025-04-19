@@ -2,7 +2,11 @@
 import { patchResponse } from "./instance";
 
 type QcardImageResponse = {
-  base64Image: string;
+  statusCode: number;
+  message: string;
+  data: {
+    base64: string;
+  };
 };
 
 type QcardTextResponse = {
@@ -27,7 +31,7 @@ export const getQcardResultData = async (processId: string) => {
 
     // 결과 분기
     const imageSuccess =
-      imageRes.status === "fulfilled" && imageRes.value?.base64Image;
+      imageRes.status === "fulfilled" && imageRes.value?.data;
     const textSuccess = textRes.status === "fulfilled" && textRes.value?.data;
 
     if (!textSuccess) {
@@ -37,7 +41,7 @@ export const getQcardResultData = async (processId: string) => {
     return {
       success: true,
       data: {
-        base64Image: imageSuccess ? imageRes?.value?.base64Image : null,
+        base64: imageSuccess ? imageRes?.value?.data?.base64 : null,
         backTitle: textRes?.value?.data.summaryTitle,
         backContent: textRes?.value?.data.summary,
       },

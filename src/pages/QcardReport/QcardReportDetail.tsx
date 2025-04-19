@@ -1,24 +1,20 @@
+import { useLocation } from "react-router-dom";
 import Header from "@components/Common/layout/Header";
 import QreportTextBox from "@components/QReport/QreportTextBox";
 import styled from "styled-components";
 
 const QcardReportDetail = () => {
-  const dummyData = [
-    { date: "2025.04.20", title: "제목" },
-    { date: "2025.04.19", title: "행복은 우리의 것" },
-    { date: "2025.04.18", title: "새로운 시작" },
-    { date: "2025.04.18", title: "새로운 시작" },
-    { date: "2025.04.18", title: "새로운 시작" },
-  ];
+  const location = useLocation();
+  const { emotion, data } = location.state || { emotion: "", data: [] };
 
   return (
     <>
       <Header title="Oh! Archive" />
       <QcardReportDetailWrapper>
-        <QCardReportDetailTitle>- 무기력</QCardReportDetailTitle>
+        <QCardReportDetailTitle>- {emotion}</QCardReportDetailTitle>
         <QcardReportDetailContainer>
           <QreportTextBox
-            data={dummyData}
+            data={data}
             wrapperHeight="70vh"
             containerHeight="65vh"
           />

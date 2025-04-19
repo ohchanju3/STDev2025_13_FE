@@ -28,12 +28,11 @@ const QcardText = () => {
     setIsLoading(true);
 
     const result = await getQcardResultData(processesId);
-    console.log("결과", result);
 
     if (result) {
       navigate("/qcardResult", {
         state: {
-          base64Image: result?.data?.base64Image ?? null,
+          base64: result?.data?.base64 ?? null,
           backTitle: result?.data?.backTitle,
           backContent: result?.data?.backContent,
         },

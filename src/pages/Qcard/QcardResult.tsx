@@ -11,7 +11,8 @@ const QcardResult = () => {
   const navigate = useNavigate();
   const [showPopup, setShowPopup] = useState(false);
   const location = useLocation();
-  const { base64Image, backTitle, backContent } = location.state || {};
+  const { base64, backTitle, backContent } = location.state || {};
+  console.log("이미지", base64);
 
   const handleArchivingClick = () => {
     setShowPopup(true);
@@ -29,7 +30,7 @@ const QcardResult = () => {
         <QcardResultBox
           flipped={flipped}
           setFlipped={setFlipped}
-          base64Image={base64Image}
+          base64={base64}
           backTitle={backTitle}
           backContent={backContent}
         />

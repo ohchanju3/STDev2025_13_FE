@@ -1,11 +1,13 @@
 import { getTopEmotions } from "@apis/getEmotionFive";
+import { getEmotionSummary } from "@apis/getEmotionSummary";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const QcardBrain = () => {
   const [emotions, setEmotions] = useState<string[]>([]);
+  const navigate = useNavigate();
 
-  // 감정 데이터를 가져오는 useEffect
   useEffect(() => {
     const fetchEmotions = async () => {
       const data = await getTopEmotions();
@@ -20,17 +22,42 @@ const QcardBrain = () => {
     fetchEmotions();
   }, []);
 
+  const handleEmotionClick = async (emotion: string) => {
+    console.log("선택된 감정:", emotion);
+
+    try {
+      const response = await getEmotionSummary(emotion);
+      console.log("감정 데이터:", response);
+
+      navigate("/qreportDetail", {
+        state: { emotion, data: response },
+      });
+    } catch (error) {
+      console.error("감정 데이터 요청 실패:", error);
+    }
+  };
+
   return (
     <>
       <QCardBrain>
         <QcardBrainTitle>- 브레인 클라우드</QcardBrainTitle>
         <QcardBrainContainer>
           <QcardBrainImg>
-            <QcardBrainText1>{emotions[0]}</QcardBrainText1>
-            <QcardBrainText2>{emotions[1]}</QcardBrainText2>
-            <QcardBrainText3>{emotions[2]}</QcardBrainText3>
-            <QcardBrainText4>{emotions[3]}</QcardBrainText4>
-            <QcardBrainText5>{emotions[4]}</QcardBrainText5>
+            <QcardBrainText1 onClick={() => handleEmotionClick(emotions[0])}>
+              {emotions[0]}
+            </QcardBrainText1>
+            <QcardBrainText2 onClick={() => handleEmotionClick(emotions[1])}>
+              {emotions[1]}
+            </QcardBrainText2>
+            <QcardBrainText3 onClick={() => handleEmotionClick(emotions[2])}>
+              {emotions[2]}
+            </QcardBrainText3>
+            <QcardBrainText4 onClick={() => handleEmotionClick(emotions[3])}>
+              {emotions[3]}
+            </QcardBrainText4>
+            <QcardBrainText5 onClick={() => handleEmotionClick(emotions[4])}>
+              {emotions[4]}
+            </QcardBrainText5>
           </QcardBrainImg>
         </QcardBrainContainer>
       </QCardBrain>

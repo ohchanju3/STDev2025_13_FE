@@ -5,13 +5,13 @@ import { useRef } from "react";
 const QcardResultBox = ({
   flipped,
   setFlipped,
-  base64Image,
+  base64,
   backTitle,
   backContent,
 }: {
   flipped: boolean;
   setFlipped: (val: boolean) => void;
-  base64Image: string;
+  base64: string;
   backTitle: string;
   backContent: string;
 }) => {
@@ -35,7 +35,7 @@ const QcardResultBox = ({
     <QcardFlipContainer onClick={() => setFlipped(!flipped)}>
       <QcardInner flipped={flipped}>
         <QcardFront ref={cardRef}>
-          <QcardResultContent image={base64Image} />
+          <QcardResultContent src={base64} alt="Q카드 이미지" />
           <QcardResultDate>{today}</QcardResultDate>
           <QcardResultDown
             src="/images/common/download.svg"
@@ -106,18 +106,15 @@ const QcardBack = styled(QcardFace)`
   margin-top: 2rem;
 `;
 
-const QcardResultContent = styled.div<{ image: string }>`
+const QcardResultContent = styled.img`
   border-radius: 20px;
-  background-image: ${({ image }) => `url(${image})`};
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
+  width: 90%;
+  height: 65%;
+  object-fit: cover;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -70%);
-  width: 100%;
-  height: 65%;
 `;
 
 const QcardResultDate = styled.div`
