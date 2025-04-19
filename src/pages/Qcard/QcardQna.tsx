@@ -35,8 +35,7 @@ const QcardQnA = () => {
 
   // answer 제출하기
   const handleSubmit = async () => {
-    setIsLoading(true); // 로딩 시작
-    console.log("사용자 답변:", answer);
+    setIsLoading(true);
 
     try {
       const res = (await submitAnswer(

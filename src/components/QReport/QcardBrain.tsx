@@ -23,18 +23,13 @@ const QcardBrain = () => {
   }, []);
 
   const handleEmotionClick = async (emotion: string) => {
-    console.log("선택된 감정:", emotion);
-
     try {
       const response = await getEmotionSummary(emotion);
-      console.log("감정 데이터:", response);
 
       navigate("/qreportDetail", {
         state: { emotion, data: response },
       });
-    } catch (error) {
-      console.error("감정 데이터 요청 실패:", error);
-    }
+    } catch (error) {}
   };
 
   return (

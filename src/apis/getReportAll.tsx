@@ -21,10 +21,8 @@ export const getReportAll = async (): Promise<ReportType[] | null> => {
     if (!response || !response.data) {
       return null;
     }
-    console.log(response.data);
     return response.data;
   } catch (error) {
-    console.error("API 요청 실패:", error);
     return null;
   }
 };

@@ -21,12 +21,10 @@ const QcardPageCreate = () => {
 
   const handleNextBtn = async () => {
     if (!selectedEmotion) {
-      console.log("감정이 선택되지 않았습니다.");
       return;
     }
 
     const response = await postSelectedImage(selectedEmotion);
-    console.log(selectedEmotion);
 
     if (response && response.statusCode === 200) {
       const { emotion, processesId, question } = response.data;
@@ -37,13 +35,10 @@ const QcardPageCreate = () => {
         question,
       });
 
-      console.log(response);
-
       navigate("/qcardQna", {
         state: { emotion, processesId, question },
       });
     } else {
-      console.log("감정 전송 실패");
     }
   };
 
