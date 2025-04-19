@@ -22,7 +22,7 @@ const Login = () => {
           <S.LoginLogo src="images/Login/LoginLogo.png" />
           <S.LoginDes>
             로그인 후에 <br />
-            Q-리포트 아카이빙까지 즐겨보세요
+            Oh! 리포트 아카이빙까지 즐겨보세요
           </S.LoginDes>
         </S.LoginLogoTextContainer>
         <S.LoginImg src="/images/Login/LoginIcon.png" />

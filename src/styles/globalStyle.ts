@@ -26,6 +26,10 @@ i {font-style:normal}
 
 }
 
+button:focus{
+	outline: 0;
+}
+
 // 초기 html 설정
 html {
 	background-color: white;

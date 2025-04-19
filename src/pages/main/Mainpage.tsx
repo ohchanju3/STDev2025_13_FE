@@ -10,13 +10,13 @@ const MainPage = () => {
         감정에서 숨겨진 호기심을 발견해봐요!
       </S.MainText>
       <S.CardContainer>
-        <Link to="qcard">
-          <Card iconSrc="/images/Main/mainLogo1.png" label="Q-카드 만들기" />
+        <Link to="/qcard">
+          <Card iconSrc="/images/Main/mainLogo1.png" label="Oh! 카드 생성" />
         </Link>
         <Link to="qreport">
           <Card
             iconSrc="/images/Login/LoginIcon.png"
-            label="Q-리포트 아카이브"
+            label="Oh! 아카이브"
             iconWidth="75%"
             marginTop="45px"
           />
