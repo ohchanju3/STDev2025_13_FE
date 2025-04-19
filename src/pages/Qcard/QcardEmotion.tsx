@@ -6,13 +6,24 @@ import EmotionContainer from "@components/Qcard/QcardEmotion";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useEmotionStore } from "src/state/emotionStore";
+import { postSelectedImage } from "@apis/postEmotion";
 
 const QcardPageCreate = () => {
   const navigate = useNavigate();
   const { selectedEmotion } = useEmotionStore();
 
-  const handleNextBtn = () => {
-    navigate("/qcardQna");
+  const handleNextBtn = async () => {
+    if (selectedEmotion !== "") {
+      const success = await postSelectedImage(selectedEmotion);
+      console.log(selectedEmotion);
+      if (success) {
+        navigate("/qcardQna");
+      } else {
+        console.log("감정 전송 실패");
+      }
+    } else {
+      console.log("감정이 선택되지 않았습니다.");
+    }
   };
 
   return (

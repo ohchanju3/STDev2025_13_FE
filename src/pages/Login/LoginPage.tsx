@@ -1,20 +1,14 @@
 import * as S from "./Login_styled";
 
 const Login = () => {
-  const handleLogin = (provider: "kakao" | "google") => {
-    const backendLoginUrl =
-      provider === "kakao"
-        ? ` https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${
-            import.meta.env.VITE_KAKAO_CLIENT_ID
-          }&redirect_uri=${import.meta.env.VITE_KAKAO_REDIRECT_URI}`
-        : ` https://accounts.google.com/o/oauth2/v2/auth?client_id=${
-            import.meta.env.VITE_GOOGLE_CLIENT_URL
-          }&redirect_uri=${
-            import.meta.env.VITE_GOOGlE_REDIRECT_URI
-          }&response_type=code&scope=https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email`;
+  const handleKakaoLogin = () => {
+    const kakaoLoginUrl = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${
+      import.meta.env.VITE_KAKAO_CLIENT_ID
+    }&redirect_uri=${import.meta.env.VITE_KAKAO_REDIRECT_URI}`;
 
-    window.location.href = backendLoginUrl;
+    window.location.href = kakaoLoginUrl;
   };
+
   return (
     <>
       <S.LoginWrapper>
@@ -29,11 +23,7 @@ const Login = () => {
         <S.LoginImgContainer>
           <S.LoginBtn
             src="/images/Login/kakao.png"
-            onClick={() => handleLogin("kakao")}
-          />
-          <S.LoginBtn
-            src="/images/Login/google.png"
-            onClick={() => handleLogin("google")}
+            onClick={handleKakaoLogin}
           />
         </S.LoginImgContainer>
       </S.LoginWrapper>

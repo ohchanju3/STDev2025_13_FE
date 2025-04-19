@@ -7,6 +7,8 @@ import QcardPageCreate from "@pages/Qcard/QcardEmotion";
 import QcardQnA from "@pages/Qcard/QcardQna";
 import QcardText from "@pages/Qcard/QcardText";
 import QcardResult from "@pages/Qcard/QcardResult";
+import OAuthRedirectHandler from "@pages/Login/OAuthRedirectHandler";
+import QcardReportPage from "@pages/QcardReport/QcardReportPage";
 
 //layouts
 
@@ -17,13 +19,17 @@ const router = createBrowserRouter([
 
     children: [
       { path: "/", element: <Intro /> },
-
+      {
+        path: "/api/oauth2/callback/:provider",
+        element: <OAuthRedirectHandler />,
+      },
       { path: "login", element: <Login /> },
       { path: "main", element: <MainPage /> },
       { path: "qcard", element: <QcardPageCreate /> },
       { path: "qcardQna", element: <QcardQnA /> },
       { path: "qcardText", element: <QcardText /> },
       { path: "qcardResult", element: <QcardResult /> },
+      { path: "qreport", element: <QcardReportPage /> },
     ],
   },
 ]);

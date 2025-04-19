@@ -43,11 +43,11 @@ const QcardText = () => {
 
   return (
     <>
-      {/* {isLoading && (
+      {isLoading && (
         <Overlay>
           <Loading text="카드 텍스트 생성 중" />
         </Overlay>
-      )} */}
+      )}
       <Header title="Oh! 카드 생성" />
       <ProgressBar totalSteps={4} currentStep={3} />
       <QCardPageWrapper>

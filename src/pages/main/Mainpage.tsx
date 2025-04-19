@@ -13,7 +13,7 @@ const MainPage = () => {
         <Link to="/qcard">
           <Card iconSrc="/images/Main/mainLogo1.png" label="Oh! 카드 생성" />
         </Link>
-        <Link to="qreport">
+        <Link to="/qreport">
           <Card
             iconSrc="/images/Login/LoginIcon.png"
             label="Oh! 아카이브"

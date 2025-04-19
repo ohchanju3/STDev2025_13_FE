@@ -5,20 +5,15 @@ export const instance = axios.create({
   withCredentials: false,
 });
 
-instance.interceptors.request.use(
-  async (config) => {
-    let accessToken = localStorage.getItem("accessToken");
+instance.interceptors.request.use((config) => {
+  const accessToken = localStorage.getItem("accessToken"); // 로컬 스토리지에서 엑세스 토큰 가져오기
 
-    if (accessToken) {
-      config.headers.Authorization = `Bearer ${accessToken}`;
-    }
-
-    return config;
-  },
-  (error) => {
-    return Promise.reject(error);
+  if (accessToken) {
+    config.headers.Authorization = `Bearer ${accessToken}`; // Authorization 헤더에 Bearer 토큰 추가
   }
-);
+
+  return config;
+});
 
 // GET 요청
 export const getResponse = async <T>(url: string): Promise<T | null> => {
@@ -34,11 +29,7 @@ export const getResponse = async <T>(url: string): Promise<T | null> => {
 // POST 요청 (응답 데이터 없음)
 export const postResponseNoData = async (url: string): Promise<boolean> => {
   try {
-    await instance.post(url, {
-      headers: {
-        Authorization: `Bearer `,
-      },
-    });
+    await instance.post(url);
     return true;
   } catch (error) {
     console.error(error);

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
+import Loading from "@components/Common/loading/Loading";
 
 interface LoginToken {
   accessToken: string;
@@ -29,7 +30,7 @@ const OAuthRedirectHandler = () => {
       localStorage.setItem("accessToken", loginToken.accessToken);
       localStorage.setItem("refreshToken", loginToken.refreshToken);
 
-      navigate("/intro");
+      navigate("/main");
       window.location.reload();
     }
   }, [loginToken, navigate]);
@@ -57,7 +58,7 @@ const OAuthRedirectHandler = () => {
     }
   };
   //Todo: 로딩 컴포넌트 생성
-  // return <Spinner />;
+  return <Loading />;
 };
 
 export default OAuthRedirectHandler;

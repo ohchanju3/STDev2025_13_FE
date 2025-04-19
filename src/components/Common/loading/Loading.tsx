@@ -2,7 +2,7 @@ import { rotateY } from "@components/Login/animation";
 import styled from "styled-components";
 
 interface LoadingProps {
-  text: string;
+  text?: string;
 }
 
 const Loading = ({ text }: LoadingProps) => {
