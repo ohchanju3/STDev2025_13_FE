@@ -37,7 +37,6 @@ const EmotionBoxContainer = styled.button<{ $selected?: boolean }>`
 
   border: ${({ $selected }) =>
     $selected ? "3px solid white" : "3px solid transparent"};
-  /* transition: border 0.2s ease; */
 `;
 
 const EmotionBoxImage = styled.img`

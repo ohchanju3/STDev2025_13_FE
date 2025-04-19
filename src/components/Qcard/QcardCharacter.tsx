@@ -11,9 +11,20 @@ const QcardCharacterWrapper = styled.div`
   }
 `;
 
-const QCardCharaterImg = styled.img`
+const QCardCharaterImg = styled.div`
   width: 103.954px;
   height: 173.215px;
+  background-image: url("/images/Main/mainLogo1.png");
+  background-size: cover;
+  background-position: center;
+  position: relative;
+`;
+
+const QCardCharacterEmotion = styled.img`
+  width: 21px;
+  position: absolute;
+  top: 110px;
+  right: 41px;
 `;
 
 const QCardTextbox = styled.div`
@@ -40,12 +51,17 @@ const QCardText = styled.p`
   text-align: center;
 `;
 
-const QcardCharacter = () => {
+interface QcardCharacterProps {
+  emotionSrc?: string;
+}
+
+const QcardCharacter = ({ emotionSrc }: QcardCharacterProps) => {
   return (
     <QcardCharacterWrapper>
-      <QCardCharaterImg src="/images/Main/mainLogo1.png" />
+      <QCardCharaterImg>
+        {emotionSrc && <QCardCharacterEmotion src={emotionSrc} />}
+      </QCardCharaterImg>
       <QCardTextbox>
-        {" "}
         <QCardText>
           지금 00님의
           <br />
@@ -55,4 +71,5 @@ const QcardCharacter = () => {
     </QcardCharacterWrapper>
   );
 };
+
 export default QcardCharacter;
