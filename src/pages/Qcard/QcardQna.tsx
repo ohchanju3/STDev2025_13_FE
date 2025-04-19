@@ -1,52 +1,67 @@
-// src/pages/QcardQnA.tsx
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import BottomButton from "@components/Common/button/BottomButton";
 import Header from "@components/Common/layout/Header";
 import ProgressBar from "@components/Qcard/ProgressBar";
 import QnaBox from "@components/Qcard/QnABox";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
-import { submitAnswer, getQuestion } from "@apis/patchAnswer";
+import { useNavigate, useLocation } from "react-router-dom";
+import { submitAnswer } from "@apis/patchAnswer";
+import Loading from "@components/Common/loading/Loading";
+
+// 응답 타입 정의
+interface SubmitAnswerResponse {
+  statusCode: number;
+  message: string;
+  data: {
+    firstResult: string;
+  };
+}
 
 const QcardQnA = () => {
-  const [question, setQuestion] = useState("");
   const [answer, setAnswer] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    // 질문 가져오기
-    const fetchQuestion = async () => {
-      try {
-        const data = await getQuestion();
-        setQuestion(data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
+  const location = useLocation();
+  const { processesId, question } = location.state || {};
 
-    fetchQuestion();
-  }, []);
+  if (!question) {
+    return;
+  }
 
   const handleBackBtn = () => {
     navigate(-1);
   };
 
-  //answer 제출하기
+  // answer 제출하기
   const handleSubmit = async () => {
+    setIsLoading(true); // 로딩 시작
     console.log("사용자 답변:", answer);
 
     try {
-      const res = await submitAnswer(answer);
-      console.log("서버 응답:", res);
-      navigate("/qcardText");
+      const res = (await submitAnswer(
+        processesId,
+        answer
+      )) as SubmitAnswerResponse;
+      const firstResult = res.data.firstResult;
+
+      setTimeout(() => {
+        navigate("/qcardText", { state: { firstResult } });
+      }, 1000);
     } catch (err) {
       console.error("전송 실패:", err);
       alert("문제가 생겼어요! 다시 시작해주세요 :(");
+      setIsLoading(false);
     }
   };
 
   return (
     <>
+      {isLoading && (
+        <Overlay>
+          <Loading text="카드 텍스트 생성 중" />
+        </Overlay>
+      )}
       <Header title="Oh! 카드 생성" />
 
       <ProgressBar totalSteps={4} currentStep={2} />
@@ -71,6 +86,19 @@ const QcardQnA = () => {
     </>
   );
 };
+
+const Overlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+`;
 
 const QCardPageWrapper = styled.div`
   display: flex;

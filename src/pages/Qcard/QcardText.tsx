@@ -1,34 +1,28 @@
+// src/pages/QcardText.tsx
+import { useEffect, useState } from "react";
 import Header from "@components/Common/layout/Header";
 import ProgressBar from "@components/Qcard/ProgressBar";
 import QcardTextBox from "@components/Qcard/QcardTextBox";
 import styled from "styled-components";
-import { useEffect, useState } from "react";
-import { getQcardText, postQcardText } from "@apis/patchQcardText";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { floatingSmall } from "@components/Login/animation";
 import Loading from "@components/Common/loading/Loading";
+import { postQcardText } from "@apis/patchQcardText";
 
 const QcardText = () => {
   const [text, setText] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
 
+  const location = useLocation();
+  const { firstResult } = location.state || {};
+
   useEffect(() => {
-    const fetchText = async () => {
-      setIsLoading(true);
-      const data = await getQcardText();
-
-      if (!data || data.startsWith("<!DOCTYPE html>")) {
-        setIsLoading(true);
-        setText("");
-      } else {
-        setText(data);
-        setIsLoading(false);
-      }
-    };
-
-    fetchText();
-  }, []);
+    if (firstResult) {
+      setText(firstResult);
+      setIsLoading(false);
+    }
+  }, [firstResult]);
 
   const submitCard = async () => {
     const success = await postQcardText(text);

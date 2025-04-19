@@ -1,16 +1,31 @@
-// api/emotion.ts
-import { postNoResponse } from "./instance";
+import { postResponse } from "./instance";
+
+interface EmotionResponse {
+  statusCode: number;
+  message: string;
+  data: {
+    emotion: string;
+    processesId: number;
+    question: string;
+  };
+}
 
 export const postSelectedImage = async (
   selectedImage: string
-): Promise<boolean> => {
+): Promise<EmotionResponse | null> => {
   try {
-    const response = await postNoResponse("/api/processes/emotion", {
-      emotion: selectedImage,
-    });
-    return response;
+    const response = await postResponse<{ emotion: string }, EmotionResponse>(
+      "/api/processes/emotion",
+      { emotion: selectedImage }
+    );
+
+    if (response && response.statusCode === 200) {
+      return response;
+    }
+
+    return null;
   } catch (error) {
     console.error("Error posting selected image:", error);
-    return false;
+    return null;
   }
 };
