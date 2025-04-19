@@ -13,7 +13,7 @@ const QcardPageCreate = () => {
   const navigate = useNavigate();
   const { selectedEmotion } = useEmotionStore();
 
-  const [responseData, setResponseData] = useState<{
+  const [_, setResponseData] = useState<{
     emotion: string;
     processesId: number;
     question: string;
@@ -48,15 +48,6 @@ const QcardPageCreate = () => {
       <ProgressBar totalSteps={4} currentStep={1} />
       <QcardCharacter />
       <EmotionContainer />
-
-      {responseData && (
-        <div>
-          <h2>응답 데이터:</h2>
-          <p>감정: {responseData.emotion}</p>
-          <p>질문: {responseData.question}</p>
-          <p>프로세스 ID: {responseData.processesId}</p>
-        </div>
-      )}
 
       <BottomButton
         onclickRight={handleNextBtn}
