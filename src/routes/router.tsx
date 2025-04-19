@@ -11,6 +11,7 @@ import OAuthRedirectHandler from "@pages/Login/OAuthRedirectHandler";
 import QcardReportPage from "@pages/QcardReport/QcardReportPage";
 import QcardReportDetail from "@pages/QcardReport/QcardReportDetail";
 import QcardReportCard from "@pages/QcardReport/QcardReportCard";
+import PrivateRoute from "./PrivateRoute";
 
 //layouts
 
@@ -26,14 +27,20 @@ const router = createBrowserRouter([
         element: <OAuthRedirectHandler />,
       },
       { path: "login", element: <Login /> },
-      { path: "main", element: <MainPage /> },
-      { path: "qcard", element: <QcardPageCreate /> },
-      { path: "qcardQna", element: <QcardQnA /> },
-      { path: "qcardText", element: <QcardText /> },
-      { path: "qcardResult", element: <QcardResult /> },
-      { path: "qreport", element: <QcardReportPage /> },
-      { path: "qreportDetail", element: <QcardReportDetail /> },
-      { path: "qreportCard", element: <QcardReportCard /> },
+
+      {
+        element: <PrivateRoute />,
+        children: [
+          { path: "main", element: <MainPage /> },
+          { path: "qcard", element: <QcardPageCreate /> },
+          { path: "qcardQna", element: <QcardQnA /> },
+          { path: "qcardText", element: <QcardText /> },
+          { path: "qcardResult", element: <QcardResult /> },
+          { path: "qreport", element: <QcardReportPage /> },
+          { path: "qreportDetail", element: <QcardReportDetail /> },
+          { path: "qreportCard", element: <QcardReportCard /> },
+        ],
+      },
     ],
   },
 ]);

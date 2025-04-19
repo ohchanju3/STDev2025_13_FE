@@ -1,15 +1,14 @@
-import { Navigate } from "react-router-dom";
-import { ReactNode } from "react";
+import { Navigate, Outlet } from "react-router-dom";
 
-const PrivateRoute = ({ children }: { children?: ReactNode }) => {
-  const accessToken = localStorage.getItem("access");
-  const refreshToken = localStorage.getItem("refresh");
+const PrivateRoute = () => {
+  const accessToken = localStorage.getItem("accessToken");
+  const refreshToken = localStorage.getItem("refreshToken");
 
   if (!accessToken || !refreshToken) {
     return <Navigate to="/login" replace />;
   }
 
-  return <>{children}</>;
+  return <Outlet />;
 };
 
 export default PrivateRoute;
