@@ -4,7 +4,7 @@ import QcardCharacter from "@components/Qcard/QcardCharacter";
 import EmotionContainer from "@components/Qcard/QcardEmotion";
 import styled from "styled-components";
 
-const QcardPage = () => {
+const QcardPageCreate = () => {
   return (
     <QCardPageWrapper>
       <Header title="Oh! 카드 생성" />
@@ -20,4 +20,4 @@ const QCardPageWrapper = styled.div`
   flex-direction: column;
 `;
 
-export default QcardPage;
+export default QcardPageCreate;
