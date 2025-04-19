@@ -12,7 +12,6 @@ const QcardResult = () => {
   const [showPopup, setShowPopup] = useState(false);
   const location = useLocation();
   const { base64, backTitle, backContent } = location.state || {};
-  console.log("이미지", base64);
 
   const handleArchivingClick = () => {
     setShowPopup(true);

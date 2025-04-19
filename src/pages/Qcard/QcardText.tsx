@@ -47,7 +47,7 @@ const QcardText = () => {
     <>
       {isLoading && (
         <Overlay>
-          <Loading text="카드 텍스트 생성 중" />
+          <Loading text="카드 이미지 생성 중" />
         </Overlay>
       )}
       <Header title="Oh! 카드 생성" />

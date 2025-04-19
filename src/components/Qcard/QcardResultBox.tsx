@@ -8,12 +8,14 @@ const QcardResultBox = ({
   base64,
   backTitle,
   backContent,
+  formattedDate,
 }: {
   flipped: boolean;
   setFlipped: (val: boolean) => void;
   base64: string;
   backTitle: string;
   backContent: string;
+  formattedDate?: string;
 }) => {
   const today = new Date().toISOString().split("T")[0].replace(/-/g, ".");
   const cardRef = useRef<HTMLDivElement>(null);
@@ -22,6 +24,7 @@ const QcardResultBox = ({
     if (cardRef.current) {
       const canvas = await html2canvas(cardRef.current, {
         backgroundColor: null,
+        useCORS: true,
       });
       const imgData = canvas.toDataURL("image/png");
       const link = document.createElement("a");
@@ -36,7 +39,7 @@ const QcardResultBox = ({
       <QcardInner flipped={flipped}>
         <QcardFront ref={cardRef}>
           <QcardResultContent src={base64} alt="Q카드 이미지" />
-          <QcardResultDate>{today}</QcardResultDate>
+          <QcardResultDate>{formattedDate ?? today}</QcardResultDate>
           <QcardResultDown
             src="/images/common/download.svg"
             onClick={(e) => {

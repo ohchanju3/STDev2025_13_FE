@@ -1,23 +1,57 @@
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
+import { fetchQcardDetail } from "@apis/getQreportDetail";
 
 interface Qcardprops {
-  data?: { date: string; title: string }[];
+  data?: { createdAt: string; summaryTitle: string }[];
   wrapperHeight?: string;
   containerHeight?: string;
 }
+
+const formatDate = (createdAt: string): string => {
+  const date = new Date(createdAt);
+  const year = date.getFullYear();
+  const month = (date.getMonth() + 1).toString().padStart(2, "0");
+  const day = date.getDate().toString().padStart(2, "0");
+  return `${year}.${month}.${day}`;
+};
 
 const QreportTextBox = ({
   data,
   wrapperHeight = "180px",
   containerHeight = "150px",
 }: Qcardprops) => {
+  const navigate = useNavigate();
+
+  const handleClick = async (summaryTitle: string, createdAt: string) => {
+    const detailRes = await fetchQcardDetail(summaryTitle);
+
+    if (detailRes?.data) {
+      navigate("/qreportCard", {
+        state: {
+          ...detailRes.data,
+          createdAt,
+        },
+      });
+    } else {
+      console.error("상세 데이터 없음 또는 에러 발생");
+    }
+  };
+
+  const sortedData = data?.sort(
+    (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+  );
+
   return (
     <QcardTextBoxWrapper height={wrapperHeight}>
       <TextContainer height={containerHeight}>
-        {data?.map((item, index) => (
-          <TextItem key={index}>
-            <DateText>{item.date}</DateText>
-            <TitleText>{item.title}</TitleText>
+        {sortedData?.map((item, index) => (
+          <TextItem
+            key={index}
+            onClick={() => handleClick(item.summaryTitle, item.createdAt)}
+          >
+            <DateText>{formatDate(item.createdAt)}</DateText>
+            <TitleText>{item.summaryTitle}</TitleText>
           </TextItem>
         ))}
       </TextContainer>
@@ -50,16 +84,15 @@ const TextContainer = styled.div<{ height: string }>`
 
 const TextItem = styled.div`
   display: flex;
-  font-size: 16.457px;
-  font-style: normal;
+  font-size: 15.385px;
   font-weight: 400;
-  line-height: 21.943px;
   padding: 5px;
   margin-bottom: 5px;
   width: 100%;
   gap: 20px;
-  font-size: 15.385px;
   cursor: pointer;
+  color: white;
+  padding: 10px;
 
   &:not(:last-child) {
     border-bottom: 1px solid #ffffff;
