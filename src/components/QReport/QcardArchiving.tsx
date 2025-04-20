@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import QreportTextBox from "./QreportTextBox";
 import { getReportAll } from "@apis/getReportAll";
+import dayjs from "dayjs"; // ✅ 추가
 
 interface ReportType {
   createdAt: string;
@@ -9,11 +10,7 @@ interface ReportType {
 }
 
 const formatDate = (createdAt: string): string => {
-  const date = new Date(createdAt);
-  const year = date.getFullYear();
-  const month = (date.getMonth() + 1).toString().padStart(2, "0");
-  const day = date.getDate().toString().padStart(2, "0");
-  return `${year}.${month}.${day}`;
+  return dayjs(createdAt).format("YYYY.MM.DD");
 };
 
 const QcardArchiving = () => {

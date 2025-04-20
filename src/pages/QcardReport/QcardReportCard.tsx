@@ -3,6 +3,7 @@ import QcardResultBox from "@components/Qcard/QcardResultBox";
 import { useLocation } from "react-router-dom";
 import { useState } from "react";
 import styled from "styled-components";
+import dayjs from "dayjs";
 
 const QcardReportCard = () => {
   const location = useLocation();
@@ -10,11 +11,7 @@ const QcardReportCard = () => {
   const [flipped, setFlipped] = useState(false);
 
   const formatDate = (createdAt: string): string => {
-    const date = new Date(createdAt);
-    const year = date.getFullYear();
-    const month = (date.getMonth() + 1).toString().padStart(2, "0");
-    const day = date.getDate().toString().padStart(2, "0");
-    return `${year}.${month}.${day}`;
+    return dayjs(createdAt).format("YYYY.MM.DD");
   };
 
   if (!data) return <div>데이터를 불러오는 중입니다...</div>;
