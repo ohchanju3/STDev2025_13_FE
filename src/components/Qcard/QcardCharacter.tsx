@@ -1,5 +1,5 @@
 import { useEmotionStore } from "src/state/emotionStore";
-import { useUserStore } from "src/state/userStore";
+// import { useUserStore } from "src/state/userStore";
 import styled from "styled-components";
 
 const QcardCharacterWrapper = styled.div`
@@ -54,7 +54,7 @@ const QCardText = styled.p`
 
 const QcardCharacter = () => {
   const { selectedEmotion } = useEmotionStore();
-  const name = useUserStore((state) => state.name);
+  // const name = useUserStore((state) => state.name);
   const emotionSrc = selectedEmotion
     ? `/images/emotion/${selectedEmotion}.png`
     : "";
