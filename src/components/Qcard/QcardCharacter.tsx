@@ -70,7 +70,7 @@ const QcardCharacter = () => {
             `#${selectedEmotion}`
           ) : (
             <>
-              지금 {name}님의
+              지금 당신의
               <br />
               감정은 어떤가요?
             </>
