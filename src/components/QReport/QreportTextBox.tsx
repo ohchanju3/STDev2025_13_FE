@@ -11,7 +11,7 @@ interface Qcardprops {
 
 const formatDate = (createdAt: string): string => {
   const date = dayjs(createdAt);
-  return date.isValid() ? date.format("YYYY.MM.DD") : "날짜 오류";
+  return date.isValid() ? date.format("YYYY.MM.DD") : "2025.04.20";
 };
 
 const QreportTextBox = ({
