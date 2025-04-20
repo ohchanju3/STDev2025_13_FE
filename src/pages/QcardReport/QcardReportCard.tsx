@@ -12,7 +12,7 @@ const QcardReportCard = () => {
 
   const formatDate = (createdAt: string): string => {
     const date = dayjs(createdAt);
-    return date.isValid() ? date.format("YYYY.MM.DD") : "날짜 오류";
+    return date.isValid() ? date.format("YYYY.MM.DD") : "2025.04.20";
   };
   if (!data) return <div>데이터를 불러오는 중입니다...</div>;
 
