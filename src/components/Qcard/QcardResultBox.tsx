@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useRef } from "react";
-import html2canvas from "html2canvas";
-import { saveAs } from "file-saver";
+// import html2canvas from "html2canvas";
+// import { saveAs } from "file-saver";
 
 const QcardResultBox = ({
   flipped,
@@ -21,19 +21,19 @@ const QcardResultBox = ({
   const today = new Date().toISOString().split("T")[0].replace(/-/g, ".");
   const cardRef = useRef<HTMLDivElement>(null);
 
-  const handleDownload = async () => {
-    if (cardRef.current) {
-      const canvas = await html2canvas(cardRef.current, {
-        backgroundColor: null,
-        useCORS: true,
-      });
-      canvas.toBlob((blob) => {
-        if (blob) {
-          saveAs(blob, "나의 oh카드.png");
-        }
-      });
-    }
-  };
+  // const handleDownload = async () => {
+  //   if (cardRef.current) {
+  //     const canvas = await html2canvas(cardRef.current, {
+  //       backgroundColor: null,
+  //       useCORS: true,
+  //     });
+  //     canvas.toBlob((blob) => {
+  //       if (blob) {
+  //         saveAs(blob, "나의 oh카드.png");
+  //       }
+  //     });
+  //   }
+  // };
 
   return (
     <QcardFlipContainer onClick={() => setFlipped(!flipped)}>
@@ -41,13 +41,13 @@ const QcardResultBox = ({
         <QcardFront ref={cardRef}>
           <QcardResultContent src={base64} alt="Q카드 이미지" />
           <QcardResultDate>{formattedDate ?? today}</QcardResultDate>
-          <QcardResultDown
+          {/* <QcardResultDown
             src="/images/common/download.svg"
             onClick={(e) => {
               e.stopPropagation();
               handleDownload();
             }}
-          />
+          /> */}
         </QcardFront>
         <QcardBack>
           <QcardBackContainer>
@@ -130,18 +130,18 @@ const QcardResultDate = styled.div`
   line-height: 22px;
   position: absolute;
   top: 85%;
-  left: 45%;
+  left: 50%;
   transform: translate(-50%, -70%);
 `;
 
-const QcardResultDown = styled.img`
-  width: 10%;
-  position: absolute;
-  top: 85%;
-  left: 80%;
-  transform: translate(-50%, -70%);
-  cursor: pointer;
-`;
+// const QcardResultDown = styled.img`
+//   width: 10%;
+//   position: absolute;
+//   top: 85%;
+//   left: 80%;
+//   transform: translate(-50%, -70%);
+//   cursor: pointer;
+// `;
 
 const QcardBackContainer = styled.section`
   border-radius: 20px;
