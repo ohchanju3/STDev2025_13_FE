@@ -150,6 +150,7 @@ const QcardBackContainer = styled.section`
   width: 100%;
   height: 100%;
   padding: 15px;
+  overflow: scroll;
 `;
 
 const QcardBackTitle = styled.h1`
