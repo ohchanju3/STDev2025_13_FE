@@ -1,6 +1,7 @@
 import styled from "styled-components";
-import html2canvas from "html2canvas";
 import { useRef } from "react";
+import html2canvas from "html2canvas";
+import { saveAs } from "file-saver";
 
 const QcardResultBox = ({
   flipped,
@@ -26,11 +27,11 @@ const QcardResultBox = ({
         backgroundColor: null,
         useCORS: true,
       });
-      const imgData = canvas.toDataURL("image/png");
-      const link = document.createElement("a");
-      link.href = imgData;
-      link.download = "나의 oh카드.png";
-      link.click();
+      canvas.toBlob((blob) => {
+        if (blob) {
+          saveAs(blob, "나의 oh카드.png");
+        }
+      });
     }
   };
 
