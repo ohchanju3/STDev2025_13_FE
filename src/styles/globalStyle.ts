@@ -70,8 +70,8 @@ body {
 }
 
 @font-face {
-    font-family: 'Uiyeun';
-    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2105@1.1/Uiyeun.woff') format('woff');
+    font-family: 'Ownglyph_StudyHard-Rg';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2411-3@1.0/Ownglyph_StudyHard-Rg.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
 }
